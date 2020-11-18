@@ -1,2 +1,5 @@
 # differential-privacy-federated-learning
-Repo based on the work of https://github.com/gitgik, but focused rewriteen to a pure python implementation.
+
+Differential Privacy applied to distributed learning NN with PyTorch. A pure python introduction.
+
+Based on the work of https://github.com/gitgik.
