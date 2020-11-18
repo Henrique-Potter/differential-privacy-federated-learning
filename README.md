@@ -1,4 +1,4 @@
-# differential-privacy-federated-learning
+# Differential-Privacy-Federated-Learning
 
 Differential Privacy applied to distributed learning NN with PyTorch. A pure python introduction.
 
