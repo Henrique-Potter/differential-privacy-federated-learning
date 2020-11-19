@@ -1,6 +1,7 @@
 import torch
 import matplotlib.pyplot as plt
-from torchvision import datasets, transforms
+
+from util import load_mnist_dataset
 
 
 def sigmoid(x):
@@ -21,21 +22,15 @@ def softmax(x):
     return torch.exp(x)/torch.sum(torch.exp(x), dim=1).view(-1, 1)
 
 
-# define a transform to normalize the data
-# if the img has three channels, you should have three number for mean,
-# for example, img is RGB, mean is [0.5, 0.5, 0.5], the normalize result is R * 0.5, G * 0.5, B * 0.5.
-# If img is grey type that is only one channel, mean should be [0.5], the normalize result is R * 0.5
-transform = transforms.Compose([transforms.ToTensor(),
-                                transforms.Normalize([0.5], [0.5])
-                               ])
-
-# download and load the traning data
-trainset = datasets.MNIST('data/MNIST_data/', download=True, train=True, transform=transform)
-trainloader = torch.utils.data.DataLoader(trainset, batch_size=64, shuffle=True)
+# Loading the MNIST dataset
+trainloader = load_mnist_dataset()
 
 # make an iterator for looping
 dataiter = iter(trainloader)
+
+# Selecting the fist image from the dataset
 images, labels = dataiter.next()
+
 print(type(images))
 print(images[0].shape)
 # NOTE: The batch size is the number of images we get in one iteration
@@ -43,22 +38,32 @@ print(images[0].shape)
 plt.imshow(images[1].numpy().squeeze())
 plt.show()
 
-# Creating a transformed view for the images (avoids copying the data)
+# Creating a transformed view for the images (view - avoids copying the data)
 flattened_images = images.view(64, 28 * 28)
 
-# flatten the images to shape(64, 784)
+# Flatten the images to shape(64, 784)
 inputs = images.view(images.shape[0], -1)
 
-# create parameters
+
+# --- Manual creation of a NN single layer ---
+
+# Defining the input layer with 256 neurons
 w1 = torch.randn(784, 256)
 b1 = torch.randn(256)
 
+# The output layer with the 10 classifications (0-10)
 w2 = torch.randn(256, 10)
 b2 = torch.randn(10)
 
+# Multiplying the squeezed image input by the weights and adding the bias
+inputAndWeights = torch.mm(inputs, w1) + b1
+# Applying the activation function
 h = sigmoid(torch.mm(inputs, w1) + b1)
 
+# Multiplying layer 1 with the weights of the last layer to get a classification
 out = torch.mm(h, w2) + b2
+
+# Mapping the last 10 neurons output to equivalent probability ranges.
 probabilities = softmax(out)
 
 print(probabilities.shape)

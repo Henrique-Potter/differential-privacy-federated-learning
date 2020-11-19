@@ -29,4 +29,5 @@ logits = model(d1_images)
 criterion = nn.CrossEntropyLoss()
 # calculate the loss with the logits and the labels
 loss = criterion(logits, labels)
+
 print(loss)
