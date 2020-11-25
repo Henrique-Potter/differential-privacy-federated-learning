@@ -1,10 +1,10 @@
 from torch import nn
-from util import load_mnist_dataset
+from util import load_mnist_traindataset
 
 
 # --- NN specialized  for the MNIST using nn sequential ---
 
-# A sequential container. Modules will be added to it in the order they are passed in the constructor.
+# A sequential container. Modules will be added to it in the order they are passed to the constructor.
 # https://pytorch.org/docs/stable/generated/torch.nn.Sequential.html
 model = nn.Sequential(nn.Linear(784, 256),
                       nn.Sigmoid(),
@@ -14,20 +14,21 @@ model = nn.Sequential(nn.Linear(784, 256),
                       )
 
 # Loading the MNIST dataset
-trainloader = load_mnist_dataset()
+trainloader = load_mnist_traindataset()
 
 # Prepare data
 images, labels = next(iter(trainloader))
 
-# flatten images
+# Flatten images
 d1_images = images.view(images.shape[0], -1)
 
-# forward pass, get the logits
+# Forward pass, get the logits
 logits = model(d1_images)
 
-# define the loss
+# Define the loss
 criterion = nn.CrossEntropyLoss()
-# calculate the loss with the logits and the labels
-loss = criterion(logits, labels)
 
+# Calculate the loss with the logits and the labels
+loss = criterion(logits, labels)
 print(loss)
+
