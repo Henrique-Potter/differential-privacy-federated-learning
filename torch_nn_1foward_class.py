@@ -3,7 +3,7 @@ import torch.nn.functional as F
 
 
 # Hardcoded neural net tuned for the MNIST dataset with two hidden layers
-from util import load_mnist_dataset
+from util import load_mnist_traindataset
 
 
 class MNISTNet(nn.Module):
@@ -37,7 +37,7 @@ class MNISTNet(nn.Module):
 # ---- Example application starts ----
 
 # Loading the MNIST dataset
-trainloader = load_mnist_dataset()
+trainloader = load_mnist_traindataset()
 
 # Get an instance of the MNISTNet class
 model = MNISTNet()
@@ -47,8 +47,12 @@ images, labels = next(iter(trainloader))
 
 # Flatten images - This function will squeeze the 28x 28 matrices into 784
 d1_images = images.view(images.shape[0], -1)
+
 # forward pass, get the logits
 logits = model(d1_images)
+logist2 = model.forward(d1_images)
+
+print(logits == logist2)
 
 # Define a loss function
 criterion = nn.CrossEntropyLoss()
