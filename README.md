@@ -16,9 +16,17 @@ If you are new to NN, I recommend the following videos to give the proper intuit
 
 Also, I recommend checking this amazing channel [3Blue1Brown](https://www.youtube.com/channel/UCYO_jab_esuFRV4b17AJtAw).
 
-## Tensors intro
+## Tensors intro:
+Work in progress
 
-## Creating simple Neural Networks
--[Low Level Single Layer NN](single_layer_test.py)
--[Multilayer NN as a Class](torch_nn_1foward_class.py) With Pytorch wrappers
--[Multilayer NN](torch_nn_1foward.py) - With high level Pytorch wrappers
+## Creating simple Neural Networks:
+- [Low Level Single Layer NN](single_layer_test.py)
+- [Multilayer NN as a Class](torch_nn_1foward_class.py) With Pytorch wrappers
+- [Multilayer NN](torch_nn_1foward.py) With high level Pytorch wrappers
+
+## Diferential Privacy
+- [Introduction](diferential_priv_intro.py)
+
+## PySyft Neural Net
+- [PySyft intro](diferential_priv_pysyft_intro.py)
+- [PySyft Distributed MNIST NN](diferential_priv_pysyft_mnist.py)
